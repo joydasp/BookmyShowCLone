@@ -1,0 +1,21 @@
+<!-- This is the container for the movie info -->
+<div *ngIf="movie" class="movie-details-container">
+  <img [src]="movie.posterUrl" [alt]="movie.title">
+  <div class="details">
+    <h1>{{ movie.title }}</h1>
+    <p><strong>Genre:</strong> {{ movie.genre }}</p>
+    <p><strong>Rating:</strong> {{ movie.rating }} / 10</p>
+    
+    <!--
+      ACTION: To avoid confusion, let's REMOVE this button.
+      The user will click on an actual showtime, not this generic button.
+    -->
+    <!-- <button class="book-button">Book Tickets</button> -->
+  </div>
+</div>
+
+<!--
+  THE FIX: Add this line right below the movie details container.
+  This tells Angular to load our ShowtimeSelectionComponent here and pass it the movieId.
+-->
+<app-showtime-selection [movieId]="movieId"></app-showtime-selection>

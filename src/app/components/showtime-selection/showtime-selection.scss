@@ -1,0 +1,21 @@
+.time-slot {
+  // ... your existing styles for the time-slot ...
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.2s; // We'll talk about this in step 4!
+
+  &:hover:not(:disabled) {
+    border-color: #f84464;
+    color: #f84464;
+  }
+
+  // ADD THESE STYLES FOR THE DISABLED STATE
+  &:disabled {
+    background-color: #f5f5f5; // Lighter grey background
+    border-color: #e0e0e0;     // Lighter grey border
+    color: #b0b0b0;           // Faded text color
+    cursor: not-allowed;      // Show a "not allowed" cursor on hover
+  }
+
+  // ... rest of your styles ...
+}

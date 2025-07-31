@@ -1,0 +1,20 @@
+<div class="showtime-container">
+  <h2>Showtimes</h2>
+  <div class="times">
+    <!--
+      THE FIX IS HERE: We use *ngFor to loop over the 'showtimes' array.
+      For each item in the array, we create a local variable named 'show'.
+    -->
+    <ng-container *ngFor="let show of showtimes">
+      <button class="time-slot"
+              [disabled]="show.availableSeats === 0"
+              [routerLink]="['/book', show.id]">
+        {{ show.time }}
+        <span>{{ show.screen }}</span>
+      </button>
+    </ng-container>
+
+    <!-- This paragraph will show up only if the showtimes array is empty -->
+    <p *ngIf="showtimes.length === 0">No showtimes available for this movie.</p>
+  </div>
+</div>

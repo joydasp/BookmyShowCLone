@@ -1,0 +1,65 @@
+<div class="booking-container">
+  <h1>Book Your Seats</h1>
+
+  <!-- ======================= MODIFICATION START ======================= -->
+  <!--
+    Part 1: The Loading Indicator
+    We wrap this section in an *ngIf. It will ONLY be displayed
+    on the screen if the 'isLoading' variable in our component's .ts
+    file is true.
+  -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>Loading seats, please wait...</p>
+    <!-- You could also add a CSS spinner animation here for a nicer effect -->
+  </div>
+
+  <!--
+    Part 2: The Main Content Wrapper
+    We wrap ALL of our previous content (screen, seat map, legend, summary)
+    in a new container div. This entire block will now ONLY be displayed
+    if the 'isLoading' variable is false.
+  -->
+  <div *ngIf="!isLoading">
+    <!-- Everything below this line is your original code, just nested inside the new div -->
+
+    <div class="screen">SCREEN</div>
+
+    <!-- Seat Map -->
+    <div class="seat-map">
+      <div *ngFor="let row of seatLayout" class="seat-row">
+        <div *ngFor="let seat of row"
+             class="seat"
+             [ngClass]="{
+               'available': seat.status === 'available',
+               'selected': seat.status === 'selected',
+               'booked': seat.status === 'booked'
+             }"
+             (click)="toggleSeat(seat)">
+          {{ seat.seatNumber }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legend-item"><div class="seat available"></div> Available</div>
+      <div class="legend-item"><div class="seat selected"></div> Selected</div>
+      <div class="legend-item"><div class="seat booked"></div> Booked</div>
+    </div>
+
+    <!-- Booking Summary -->
+    <div *ngIf="selectedSeats.length > 0" class="booking-summary">
+      <h2>Summary</h2>
+      <p>Seats:
+        <span *ngFor="let seat of selectedSeats" class="selected-seat-tag">
+          {{ seat.seatNumber }}
+        </span>
+      </p>
+      <p class="total-price">Total: {{ totalPrice | currency:'INR' }}</p>
+      <button class="proceed-btn">Proceed to Payment</button>
+    </div>
+
+  </div> <!-- End of the !isLoading wrapper div -->
+  <!-- ======================== MODIFICATION END ======================== -->
+
+</div>
